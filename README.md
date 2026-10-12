@@ -100,42 +100,49 @@ Configured enterprise tunnel parameters under **VPN > IPsec**:
 
 ### Test 1: pfSense Executive Dashboard & Interface Telemetry
 ![pfSense Dashboard](Screenshot/01_pfSense_Dashboard.png)
+
 *Figure 1: pfSense 2.9.0-RELEASE FreeBSD kernel console displaying verified dual-homed interface assignments: WAN (`em0` via DHCP `10.0.2.15/24`) and LAN (`em1` via Static `192.168.1.1/24`).*
 
 ---
 
 ### Test 2: Firewall Rules & Outbound DNS Egress Filtering
 ![Firewall LAN Rules](Screenshot/02_Firewall_LAN_Rules.png)
+
 *Figure 2: Firewall Rules on the LAN interface confirming active enforcement and correct top-down rule ordering: Outbound UDP Port 53 block rule positioned directly above the default allow rule to intercept and drop rogue external DNS queries before general egress.*
 
 ---
 
 ### Test 3: IPsec IKEv2 Phase 1 Configuration Status
 ![IPsec Phase 1 Config](Screenshot/03_IPsec_Phase1_Config.png)
+
 *Figure 3: IPsec Phase 1 configuration confirming IKEv2 exchange protocol, WAN interface binding, remote gateway (`203.0.113.10`), Mutual PSK authentication, and IP address peer identification.*
 
 ---
 
 ### Test 4: IPsec ESP Phase 2 Encryption Proposal
 ![IPsec Phase 2 Config](Screenshot/04_IPsec_Phase2_Config.png)
+
 *Figure 4: IPsec Phase 2 configuration establishing an Encapsulating Security Payload (ESP) data tunnel utilizing hardware-accelerated AES256-GCM (128-bit ICV), SHA256 integrity hashing, and PFS Group 14 (2048-bit).*
 
 ---
 
 ### Test 5: Wireshark Cleartext HTTP Exposure Forensic Analysis
 ![Wireshark HTTP Cleartext](Screenshot/05_Wireshark_HTTP_Cleartext.png)
+
 *Figure 5: Wireshark packet capture displaying raw, unencrypted HTTP payload reconstructed via Follow TCP Stream against CERN web server (`info.cern.ch`), exposing cleartext vulnerability (HTTP GET request and unencrypted HTML markup) to sniffing attacks.*
 
 ---
 
 ### Test 6: Wireshark Stateful TCP 3-Way Handshake Inspection
 ![Wireshark TCP Handshake](Screenshot/06_Wireshark_TCP_Handshake.png)
+
 *Figure 6: Wireshark frame sequence displaying the sequential TCP 3-way handshake on port 443: SYN (Packet 36), SYN-ACK (Packet 37 with expanded control flags `Syn=1`, `Ack=1`), and ACK (Packet 38).*
 
 ---
 
 ### Test 7: Wireshark Encrypted TLS Session Handshake
 ![Wireshark TLS Handshake](Screenshot/07_Wireshark_TLS_Handshake.png)
+
 *Figure 7: Wireshark inspection of the TLS 1.2 cryptographic session showing Client Hello (SNI `www.msn.com`), Server Hello, Certificate exchange, and dissecting Packet 49 to confirm encrypted Application Data payload.*
 
 ---
